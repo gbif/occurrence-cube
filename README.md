@@ -53,7 +53,7 @@ It is envisaged the workflow will be structed as follows, and initiated through 
     
 ### Acknowledgements
 
-![EU Funded](eu.png)
+![EU Funded](eu-logo.png)
 
 This project receives funding from the European Union’s Horizon 2020 research and innovation programme under the the Biodiversity Building Blocks for Policy (known as B-cubed or B³) grant agreement No 101059592.
 
