@@ -51,4 +51,6 @@ It is envisaged the workflow will be structed as follows, and initiated through 
 
     1. Stored (also) on GBIF’s systems for a year, or indefinitely if cited  
     
-*This project is funded by the EU Horizon project, Building Blocks for Biodiversity (known as B-cubed or B³)*
+> This project is funded by the EU Horizon project, Building Blocks for Biodiversity (known as B-cubed or B³).     
+> Project: 101059592 — B3 — HORIZON-CL6-2021-GOVERNANCE-01. 
+
