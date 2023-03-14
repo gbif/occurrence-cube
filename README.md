@@ -1,4 +1,5 @@
-# occurrence-cube
+# Occurrence Cube
+
 Workflows for producing species occurrence cubes from GBIF mediated data.
 
 This will contain software for running on GBIF and a public cloud (AWS, Azure etc) using a monthly data export. 
@@ -11,43 +12,43 @@ It is envisaged the workflow will be structed as follows, and initiated through 
     
 2. Apply transformations (phase 2)
     
-    - E.g. reorganise to taxonomy X
+    * E.g. reorganise to taxonomy X
     
 3. Define the dimensions. E.g.:
 
-    a. Taxon
+    1. Taxon
     
-      - bucket by family
+       * bucket by family
        
-    b Temporal
+    2. Temporal
     
-      - bucket on year
-      - discard data outside precision
+       * bucket on year
+       * discard data outside precision
         
-    c. Geography
+    3. Geography
     
-      - bucket on cell-id (e.g. UTM) [MB: Antarctica?]
-      - randomise using “technique-x”
-      - (Or possibly assign to a higher point in the hierarchy.)
+       * bucket on cell-id (e.g. UTM) [MB: Antarctica?]
+       * randomise using “technique-x”
+       * (Or possibly assign to a higher point in the hierarchy.)
         
-    d. Lifestage
+    4. Lifestage
     
-      - bucket by vocabulary (nulls default to NOT-SUPPLIED)
+       * bucket by vocabulary (nulls default to NOT-SUPPLIED)
         
 4. Select output format(s):
  
-    a. CSV
-    b. Parquet
-    c. NetCDF
-    d. HDF 5
-    e. GeoTIFF
-    f. ZAAR https://zarr.readthedocs.io/en/stable/
-    g. Etc
+    1. CSV
+    2. Parquet
+    3. NetCDF
+    4. HDF 5
+    5. GeoTIFF
+    6. [ZAAR](https://zarr.readthedocs.io/en/stable/)
+    7. Etc
     
 5. Assign DOI (Including links to the source datasets)
 
 6.  Select destination (AWS, Azure, GCS, GBIF storage etc)
 
-    a. Stored (also) on GBIF’s systems for a year, or indefinitely if cited  
+    1. Stored (also) on GBIF’s systems for a year, or indefinitely if cited  
     
 *This project is funded by the EU Horizon project, Building Blocks for Biodiversity (known as B-cubed or B3)*
