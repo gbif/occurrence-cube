@@ -1,0 +1,20 @@
+*.class
+*.iml
+.idea
+*target
+.DS_Store
+logs
+pom.xml.releaseBackup
+**/application.properties
+
+**/application.properties
+**/conf
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.classpath
+*.project
+*.settings/
+*dependency-reduced-pom.xml
