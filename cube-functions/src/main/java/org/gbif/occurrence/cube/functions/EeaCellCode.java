@@ -1,24 +1,19 @@
-package org.gbif.graph.clustering.udf;
+package org.gbif.occurrence.cube.functions;
 
-import org.apache.spark.sql.api.java.UDF4;
 import org.geotools.referencing.CRS;
 import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 
-/**
- * Randomize a point according to its coordinateUncertainty (or some other distance), and determine the
- * EEA Reference Grid Cell in which the randomized point lies.
- */
-public class EeaCellCodeUdf implements UDF4<Integer,Double,Double,Double,String> {
+public class EeaCellCode {
 
-  // SEED?
+  private final MathTransform transform;
+
+  // TODO: Suitable seed value.
   // https://able.bio/patrickcording/reproducible-distributed-random-number-generation-in-spark--03tcnko
-  private static final Double SEED = 7389450.0;
+  // private final Double seed = 7389450.0;
 
-  MathTransform transform;
-
-  public EeaCellCodeUdf() {
+  public EeaCellCode() {
     try {
       // Would need the library added.
       // crs = CRS.decode("EPSG:3035");
@@ -44,12 +39,16 @@ public class EeaCellCodeUdf implements UDF4<Integer,Double,Double,Double,String>
         "  AXIS[\"Easting\", EAST] \n" +
         "]");
 
-      transform = CRS.findMathTransform(DefaultGeographicCRS.WGS84, crs,true);
-    } catch (Exception e) {}
+      this.transform = CRS.findMathTransform(DefaultGeographicCRS.WGS84, crs,true);
+    } catch (Exception e) {
+      throw new RuntimeException("Unable to load EPSG:3035 coordinate transform");
+    }
   }
 
-  @Override
-  public String call(Integer gridSize, Double lat, Double lon, Double coordinateUncertaintyInMeters) throws Exception {
+  /**
+   * Spark SQL UDF method.
+   */
+  public String fromCoordinate(Integer gridSize, Double lat, Double lon, Double coordinateUncertaintyInMeters) throws Exception {
     // sanitize the input, force the user to specify these values
     if (gridSize == null) {
       throw new IllegalArgumentException("gridSize is required");

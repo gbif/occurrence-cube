@@ -1,7 +1,7 @@
-package org.gbif.graph.clustering;
+package org.gbif.occurrence;
 
 import org.apache.spark.sql.SparkSession;
-import org.gbif.graph.clustering.udf.UDFS;
+import org.gbif.occurrence.spark.udf.UDFS;
 
 import java.io.File;
 
@@ -22,7 +22,10 @@ public class Spark {
 
     UDFS.registerUdfs(spark);
 
-    String table = "datacube_si_csv_20230522";
+//    String table = "datacube_europe_lynx_lynx_1km_b";
+//    String table = "datacube_europe_carduelis_citrinella_1km";
+//    String table = "datacube_europe_reynoutria_japonica_1km";
+    String table = "datacube_slovenia_1km";
 
     spark.sql(
         "SELECT " +
@@ -51,6 +54,26 @@ public class Spark {
           "         OR LOWER(identificationVerificationStatus) LIKE '%validation requested%')) " +
 
           "  AND countryCode = 'SI' " +
+
+          // User query:
+          //"  AND countryCode = 'SI' " +
+
+          // Netherlands farm bird query.
+//          "  AND year = 2018 " +
+//          "  AND decimalLongitude >= 5.5831989141242966 " +
+//          "  AND decimalLongitude <= 6.4086515407429623 " +
+//          "  AND decimalLatitude >= 52.5917375949509562 " +
+//          "  AND decimalLatitude <= 52.8070852699905871 " +
+//          "  AND speciesKey IN (8077224, 8332393, 2490266, 2497266, 2494686, 2482513, 2474156, 2491534, 9616058, 2481819, 7788295, 2493220, 9515886, 2481685, 7634625, 9701857, 2481792, 5231198, 2473958, 8250742, 2492526, 2495708, 9809229, 2492943, 2481714, 2490774, 2480242) " +
+
+//          "  AND year >= 2000 " +
+//          "  AND coordinateUncertaintyInMeters IS NOT NULL AND coordinateUncertaintyInMeters <= 1000 " +
+//          "  AND continent = 'EUROPE' " +
+//          "  AND speciesKey = 2435240 " + // Lynx lynx (Linnaeus, 1758)
+//          "  AND speciesKey = 2494632 " + // Carduelis citrinella (Pallas, 1764)
+//          "  AND speciesKey = 2889173 " + // Reynoutria japonica Houtt.
+
+          // End user query
           "  AND year > 1000 " +
           "  AND hasCoordinate " +
           "GROUP BY " +
@@ -66,10 +89,10 @@ public class Spark {
       // This creates CSV files in HDFS, but the Hive meta-information is incorrect, it declares SequenceFile format.
       // See https://issues.apache.org/jira/browse/SPARK-31799
       // This table can only be read by Spark. (Or at least, cannot be read by Hive.)
-      .saveAsTable("matt."+table);
+      //.saveAsTable("matt."+table);
 
     // Alternatively, save the files to HDFS:
-    // .save("hdfs://ha-nn/user/hive/warehouse/matt.db/"+table);
+     .save("hdfs://ha-nn/user/hive/warehouse/matt.db/"+table);
     // And then create the Hive table like this, which can be read by Hive:
     // spark.sql("CREATE EXTERNAL TABLE matt." + table + " " +
     //     "(year INTEGER, eeaCellCode STRING, speciesKey INTEGER, n BIGINT, minCoordinateUncertaintyInMeters DOUBLE) " +
