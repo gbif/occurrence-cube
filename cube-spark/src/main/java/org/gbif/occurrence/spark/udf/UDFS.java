@@ -7,6 +7,7 @@ public class UDFS {
 
   public static void registerUdfs(SparkSession sparkSession) {
     sparkSession.udf().register("eeaCellCode", new EeaCellCodeUdfSpark(), DataTypes.StringType);
+    sparkSession.udf().register("mgrsCellCode", new MilitaryGridReferenceSystemCellCodeUdfSpark(), DataTypes.StringType);
     sparkSession.udf().register("qdgcCode", new ExtendedQuarterDegreeGridCellCodeUdfSpark(), DataTypes.StringType);
     sparkSession.udf().register("stringArrayContains", new StringArrayContainsGenericUdf(), DataTypes.BooleanType);
   }

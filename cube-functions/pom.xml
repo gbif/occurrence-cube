@@ -23,6 +23,11 @@
       <groupId>org.geotools</groupId>
       <artifactId>gt-epsg-hsql</artifactId>
     </dependency>
+    <dependency>
+      <groupId>mil.nga</groupId>
+      <artifactId>mgrs</artifactId>
+      <classifier>jdk8</classifier>
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
