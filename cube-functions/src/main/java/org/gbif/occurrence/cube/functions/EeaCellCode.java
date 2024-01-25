@@ -5,6 +5,11 @@ import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 
+/**
+ * European Economic Area Reference Grid.
+ *
+ * https://www.eea.europa.eu/data-and-maps/data/eea-reference-grids-2/about-the-eea-reference-grid/eea_reference_grid_v1.pdf/download
+ */
 public class EeaCellCode {
 
   private final MathTransform transform;
@@ -46,7 +51,9 @@ public class EeaCellCode {
   }
 
   /**
-   * Spark SQL UDF method.
+   * Calculate the EEA refreence grid cell code for a given grid size, coordinate and uncertainty.
+   *
+   * Randomize the coordinate within its uncertainty circle.
    */
   public String fromCoordinate(Integer gridSize, Double lat, Double lon, Double coordinateUncertaintyInMeters) throws Exception {
     // sanitize the input, force the user to specify these values
