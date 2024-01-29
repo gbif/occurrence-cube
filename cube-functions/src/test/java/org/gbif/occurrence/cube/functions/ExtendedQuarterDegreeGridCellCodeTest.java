@@ -39,6 +39,8 @@ public class ExtendedQuarterDegreeGridCellCodeTest {
     Assert.assertEquals("W000S00C", eqdgcc.fromCoordinate(1, -0.5, -0.5, 0.0));
     Assert.assertEquals("E000N00BCCCCC", eqdgcc.fromCoordinate(6, 0.5, 0.5, 0.0));
     Assert.assertEquals("W000S00CBBBBB", eqdgcc.fromCoordinate(6, -0.5, -0.5, 0.0));
+
+    Assert.assertEquals("E014N46CA", eqdgcc.fromCoordinate(2, 46.377106, 14.033383, 1000.0));
   }
 
   @Test

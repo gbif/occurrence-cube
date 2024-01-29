@@ -6,11 +6,11 @@ import org.junit.Test;
 public class MilitaryGridReferenceSystemCellCodeTest {
 
   @Test
-  public void basicTest() {
+  public void basicTest() throws Exception {
     MilitaryGridReferenceSystemCellCode mgrs = new MilitaryGridReferenceSystemCellCode();
 
     // Values checked with https://www.legallandconverter.com/p50.html
-    Assert.assertEquals("32UNC", mgrs.fromCoordinate(0, 52.0, 10.0, 0.0));
+    Assert.assertEquals("32U", mgrs.fromCoordinate(0, 52.0, 10.0, 0.0));
     Assert.assertEquals("32UNC", mgrs.fromCoordinate(100_000, 52.0, 10.0, 0.0));
     Assert.assertEquals("32UNC66", mgrs.fromCoordinate(10_000, 52.0, 10.0, 0.0));
     Assert.assertEquals("32UNC6861", mgrs.fromCoordinate(1_000, 52.0, 10.0, 0.0));
@@ -21,10 +21,12 @@ public class MilitaryGridReferenceSystemCellCodeTest {
     Assert.assertEquals("29FMC3135038489", mgrs.fromCoordinate(1, -52.0, -10.0, 0.0));
 
     Assert.assertEquals("31NAA6602100000", mgrs.fromCoordinate(1, 0.0, 0.0, 0.0));
+
+    Assert.assertEquals("33TVL", mgrs.fromCoordinate(100_000, 45.8631, 14.5367, 1000.0));
   }
 
   @Test
-  public void failTests() {
+  public void failTests() throws Exception {
     MilitaryGridReferenceSystemCellCode mgrs = new MilitaryGridReferenceSystemCellCode();
 
     try {

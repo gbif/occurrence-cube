@@ -4,6 +4,8 @@ import mil.nga.grid.features.Point;
 import mil.nga.mgrs.MGRS;
 import mil.nga.mgrs.grid.GridType;
 
+import java.awt.geom.Point2D;
+
 /**
  * Extended Quarter Degree Grid Cell codes.
  *
@@ -29,14 +31,11 @@ public class MilitaryGridReferenceSystemCellCode {
       return null;
     }
 
-    // Assign occurrence within uncertainty circle
-    double theta = Math.random() * 2 * Math.PI;
-    double r = Math.sqrt(Math.random()) * coordinateUncertaintyInMeters;
-    lon += r * Math.cos(theta);
-    lat += r * Math.sin(theta);
+    // Reproject the coordinate
+    Point2D moved = RandomizeCoordinate.moveCoordinate(new Point2D.Double(lon, lat), coordinateUncertaintyInMeters);
 
     // Find grid cell to which the occurrence belongs
-    return militaryGridReferenceSystemCellCode(gridSize, lat, lon);
+    return militaryGridReferenceSystemCellCode(gridSize, moved.getY(), moved.getX());
   }
 
   private static String militaryGridReferenceSystemCellCode(int gridSize, double lat, double lon) {
@@ -44,9 +43,15 @@ public class MilitaryGridReferenceSystemCellCode {
       return null;
     }
 
-    GridType gridType = GridType.getPrecision(gridSize);
     Point p = Point.point(lon, lat);
-    MGRS mgrs = MGRS.from(p);
-    return mgrs.coordinate(gridType);
+
+    if (gridSize == 0) {
+      MGRS mgrs = MGRS.from(p);
+      return mgrs.getGridZone().getName();
+    } else {
+      GridType gridType = GridType.getPrecision(gridSize);
+      MGRS mgrs = MGRS.from(p);
+      return mgrs.coordinate(gridType);
+    }
   }
 }

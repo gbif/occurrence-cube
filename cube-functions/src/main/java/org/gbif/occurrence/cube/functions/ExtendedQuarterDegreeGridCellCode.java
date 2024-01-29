@@ -1,5 +1,7 @@
 package org.gbif.occurrence.cube.functions;
 
+import java.awt.geom.Point2D;
+
 /**
  * Extended Quarter Degree Grid Cell codes.
  *
@@ -25,14 +27,11 @@ public class ExtendedQuarterDegreeGridCellCode {
       return null;
     }
 
-    // Assign occurrence within uncertainty circle
-    double theta = Math.random() * 2 * Math.PI;
-    double r = Math.sqrt(Math.random()) * coordinateUncertaintyInMeters;
-    lon += r * Math.cos(theta);
-    lat += r * Math.sin(theta);
+    // Reproject the coordinate
+    Point2D moved = RandomizeCoordinate.moveCoordinate(new Point2D.Double(lon, lat), coordinateUncertaintyInMeters);
 
     // Find grid cell to which the occurrence belongs
-    return extendedQuarterDegreeGridCellCode(level, lat, lon);
+    return extendedQuarterDegreeGridCellCode(level, moved.getY(), moved.getX());
   }
 
   /*
