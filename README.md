@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/613830889.svg)](https://zenodo.org/doi/10.5281/zenodo.10607133)
+
 # Occurrence Cube
 
 Workflows for producing species occurrence cubes from GBIF mediated data.
