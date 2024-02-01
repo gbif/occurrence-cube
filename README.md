@@ -51,6 +51,11 @@ It is envisaged the workflow will be structured as follows, and initiated throug
 
     1. Stored (also) on GBIF’s systems for a year, or indefinitely if cited
 
+### Licence
+
+Occurrence Cube is licensed under the Apache License, Version 2.0 <LICENSE-APACHE>
+or the MIT license <LICENSE-MIT>, at your option.
+
 ### Acknowledgements
 
 <img src="funded_by_the_eu.png" alt="Funded by the European Union" width="50%">
