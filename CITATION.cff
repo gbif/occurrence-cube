@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - given-names: Matthew
+    family-names: Blissett
+    affiliation: Global Biodiversity Information Facility (GBIF)
+    orcid: 'https://orcid.org/0000-0003-0623-6682'
+  - given-names: Tim
+    family-names: Robertson
+    affiliation: Global Biodiversity Information Facility (GBIF)
+    orcid: 'https://orcid.org/0000-0001-6215-3617'
+  - given-names: Peter
+    family-names: Desmet
+    affiliation: Research Institute for Nature and Forest (INBO)
+    orcid: 'https://orcid.org/0000-0002-8442-8025'
+title: Occurrence cube functions
+abstract: >-
+  Functions for producing species occurrence cubes from
+  GBIF-mediated data.
+keywords:
+  - GBIF
+  - species occurrence
+license: MIT
+type: software
+url: "https://github.com/gbif/occurrence-cube"
