@@ -1,8 +1,10 @@
-[![DOI](https://zenodo.org/badge/613830889.svg)](https://zenodo.org/doi/10.5281/zenodo.10607133)
-
 # Occurrence Cube
 
-Workflows for producing species occurrence cubes from GBIF mediated data.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10607133.svg)](https://doi.org/10.5281/zenodo.10607133)
+
+Functions for producing species occurrence cubes from GBIF-mediated data.
+
+---
 
 This will contain software for running on GBIF and a public cloud (AWS, Azure etc) using a monthly data export.
 
