@@ -5,10 +5,10 @@ import org.junit.Test;
 
 public class ExtendedQuarterDegreeGridCellCodeTest {
 
+  ExtendedQuarterDegreeGridCellCode eqdgcc = new ExtendedQuarterDegreeGridCellCode();
+
   @Test
   public void basicTest() {
-    ExtendedQuarterDegreeGridCellCode eqdgcc = new ExtendedQuarterDegreeGridCellCode();
-
     Assert.assertEquals("E010N52", eqdgcc.fromCoordinate(0, 52.0, 10.0, 0.0));
     Assert.assertEquals("E010S52", eqdgcc.fromCoordinate(0, -52.0, 10.0, 0.0));
     Assert.assertEquals("W010N52", eqdgcc.fromCoordinate(0, 52.0, -10.0, 0.0));
@@ -44,17 +44,38 @@ public class ExtendedQuarterDegreeGridCellCodeTest {
   }
 
   @Test
-  public void failTests() {
-    ExtendedQuarterDegreeGridCellCode eqdgcc = new ExtendedQuarterDegreeGridCellCode();
-
+  public void illegalArgumentTests() throws Exception {
+    // No level
     try {
       eqdgcc.fromCoordinate(null, 52.0, 10.0, 0.0);
       Assert.fail();
     } catch (IllegalArgumentException e) {
     }
+
+    // Beyond 90° / 180°
+    try {
+      eqdgcc.fromCoordinate(1, 91.0, 10.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+    try {
+      eqdgcc.fromCoordinate(1, 52.0, 181.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+  }
+
+  @Test
+  public void nullArgumentTest() throws Exception {
+    // Missing coordinate or uncertainty
     Assert.assertNull(eqdgcc.fromCoordinate(1, null, 10.0, 0.0));
     Assert.assertNull(eqdgcc.fromCoordinate(1, 52.0, null, 0.0));
     Assert.assertNull(eqdgcc.fromCoordinate(1, 52.0, 10.0, null));
+  }
+
+  @Test
+  public void beyondExtentTest() throws Exception {
+    // Extent is whole world.
   }
 }
 

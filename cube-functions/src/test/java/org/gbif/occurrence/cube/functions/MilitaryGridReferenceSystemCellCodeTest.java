@@ -5,10 +5,10 @@ import org.junit.Test;
 
 public class MilitaryGridReferenceSystemCellCodeTest {
 
+  MilitaryGridReferenceSystemCellCode mgrs = new MilitaryGridReferenceSystemCellCode();
+
   @Test
   public void basicTest() throws Exception {
-    MilitaryGridReferenceSystemCellCode mgrs = new MilitaryGridReferenceSystemCellCode();
-
     // Values checked with https://www.legallandconverter.com/p50.html
     Assert.assertEquals("32U", mgrs.fromCoordinate(0, 52.0, 10.0, 0.0));
     Assert.assertEquals("32UNC", mgrs.fromCoordinate(100_000, 52.0, 10.0, 0.0));
@@ -26,18 +26,37 @@ public class MilitaryGridReferenceSystemCellCodeTest {
   }
 
   @Test
-  public void failTests() throws Exception {
-    MilitaryGridReferenceSystemCellCode mgrs = new MilitaryGridReferenceSystemCellCode();
-
+  public void illegalArgumentTests() throws Exception {
+    // No grid size
     try {
       mgrs.fromCoordinate(null, 52.0, 10.0, 0.0);
       Assert.fail();
     } catch (IllegalArgumentException e) {
     }
+
+    // Beyond 90° / 180°
+    try {
+      mgrs.fromCoordinate(1, 91.0, 10.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+    try {
+      mgrs.fromCoordinate(1, 52.0, 181.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+  }
+
+  @Test
+  public void nullArgumentTest() throws Exception {
+    // Missing coordinate or uncertainty
     Assert.assertNull(mgrs.fromCoordinate(1, null, 10.0, 0.0));
     Assert.assertNull(mgrs.fromCoordinate(1, 52.0, null, 0.0));
     Assert.assertNull(mgrs.fromCoordinate(1, 52.0, 10.0, null));
+  }
 
+  @Test
+  public void beyondExtentTest() throws Exception {
     // Polar regions are not supported.
     // https://github.com/ngageoint/mgrs-java/issues/2 suggests they could be.
     Assert.assertNull(mgrs.fromCoordinate(1, Math.nextUp(84.0), 0.0, 0.0));

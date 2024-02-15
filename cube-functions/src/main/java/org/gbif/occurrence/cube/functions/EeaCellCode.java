@@ -43,7 +43,6 @@ public class EeaCellCode {
         "  AXIS[\"Northing\", NORTH], \n" +
         "  AXIS[\"Easting\", EAST] \n" +
         "]");
-
       this.transform = CRS.findMathTransform(DefaultGeographicCRS.WGS84, crs,true);
     } catch (Exception e) {
       throw new RuntimeException("Unable to load EPSG:3035 coordinate transform");
@@ -51,7 +50,7 @@ public class EeaCellCode {
   }
 
   /**
-   * Calculate the EEA refreence grid cell code for a given grid size, coordinate and uncertainty.
+   * Calculate the EEA reference grid cell code for a given grid size, coordinate and uncertainty.
    *
    * Randomize the coordinate within its uncertainty circle.
    */
@@ -60,11 +59,11 @@ public class EeaCellCode {
     if (gridSize == null) {
       throw new IllegalArgumentException("gridSize is required");
     }
-    if (coordinateUncertaintyInMeters == null) {
+    if (coordinateUncertaintyInMeters == null || lat == null || lon == null) {
       return null;
     }
-    if (lat == null || lon == null) {
-      return null;
+    if (lat > 90 || lat < -90 || lon > 180 || lon < -180) {
+      throw new IllegalArgumentException("Latitude and longitude must be within ±90° and ±180°.");
     }
 
     // Step 1: Reproject the coordinate
@@ -75,13 +74,19 @@ public class EeaCellCode {
     double x = dstPt[1]; // Axis order NORTH_EAST for EPSG:3035
     double y = dstPt[0];
 
-    // Step 2: assign occurrence within uncertainty circle
+    // Step 2: Limit to the extent of the EPSG:3035 ETRS89-extended projection
+    // Limits are the projected bounds from https://epsg.io/3035
+    if (x < 1_896_628.62 || x > 7_104_179.2 || y < 1_095_703.18 || y > 6_882_401.15) {
+      return null;
+    }
+
+    // Step 3: assign occurrence within uncertainty circle
     double theta = Math.random() * 2 * Math.PI;
     double r = Math.sqrt(Math.random()) * coordinateUncertaintyInMeters;
     x += r * Math.cos(theta);
     y += r * Math.sin(theta);
 
-    // Step 3: Find grid cell to which the occurrence belongs
+    // Step 4: Find grid cell to which the occurrence belongs
     return eeaCellCode(gridSize, x, y);
   }
 

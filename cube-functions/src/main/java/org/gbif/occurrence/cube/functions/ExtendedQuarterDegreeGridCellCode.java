@@ -20,11 +20,11 @@ public class ExtendedQuarterDegreeGridCellCode {
     if (level == null) {
       throw new IllegalArgumentException("level is required");
     }
-    if (coordinateUncertaintyInMeters == null) {
+    if (coordinateUncertaintyInMeters == null || lat == null || lon == null) {
       return null;
     }
-    if (lat == null || lon == null) {
-      return null;
+    if (lat > 90 || lat < -90 || lon > 180 || lon < -180) {
+      throw new IllegalArgumentException("Latitude and longitude must be within ±90° and ±180°.");
     }
 
     // Reproject the coordinate
