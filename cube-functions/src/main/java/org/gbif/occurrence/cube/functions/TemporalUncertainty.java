@@ -2,6 +2,7 @@ package org.gbif.occurrence.cube.functions;
 
 import org.gbif.api.util.IsoDateInterval;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,7 +26,7 @@ import java.time.temporal.TemporalUnit;
  *
  * https://docs.gbif-uat.org/b-cubed/1.0/en/#minimum-temporal-uncertainty
  */
-public class TemporalUncertainty {
+public class TemporalUncertainty implements Serializable {
 
   private static final DateTimeFormatter TIME_PATTERN =
     DateTimeFormatter.ofPattern("HH:mm[:ss[.SSSSSSSSS][.SSSSSSSS][.SSSSSSS][.SSSSSS][.SSSSS][.SSSS][.SSS][.SS][.S]][XXXXX][XXXX][XXX][XX][X]");

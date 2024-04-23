@@ -5,12 +5,14 @@ import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 
+import java.io.Serializable;
+
 /**
  * European Economic Area Reference Grid.
  *
  * https://www.eea.europa.eu/data-and-maps/data/eea-reference-grids-2/about-the-eea-reference-grid/eea_reference_grid_v1.pdf/download
  */
-public class EeaCellCode {
+public class EeaCellCode implements Serializable {
 
   private final MathTransform transform;
 

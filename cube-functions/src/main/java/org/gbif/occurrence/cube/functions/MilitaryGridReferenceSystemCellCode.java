@@ -5,13 +5,14 @@ import mil.nga.mgrs.MGRS;
 import mil.nga.mgrs.grid.GridType;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 
 /**
  * Extended Quarter Degree Grid Cell codes.
  *
  * https://doi.org/10.1111/j.1365-2028.2008.00997.x
  */
-public class MilitaryGridReferenceSystemCellCode {
+public class MilitaryGridReferenceSystemCellCode implements Serializable {
 
   // TODO: Suitable seed value.
 

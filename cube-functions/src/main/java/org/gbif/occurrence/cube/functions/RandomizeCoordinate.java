@@ -3,11 +3,12 @@ package org.gbif.occurrence.cube.functions;
 import org.geotools.referencing.GeodeticCalculator;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 
 /**
  * Move a coordinate from its origin a random distance at a random angle.
  */
-public class RandomizeCoordinate {
+public class RandomizeCoordinate implements Serializable {
 
   public static Point2D moveCoordinate(Point2D point, Double coordinateUncertaintyInMeters) {
     if (coordinateUncertaintyInMeters == null) {

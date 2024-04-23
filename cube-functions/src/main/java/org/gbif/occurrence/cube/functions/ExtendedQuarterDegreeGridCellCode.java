@@ -1,13 +1,14 @@
 package org.gbif.occurrence.cube.functions;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 
 /**
  * Extended Quarter Degree Grid Cell codes.
  *
  * https://doi.org/10.1111/j.1365-2028.2008.00997.x
  */
-public class ExtendedQuarterDegreeGridCellCode {
+public class ExtendedQuarterDegreeGridCellCode implements Serializable {
 
   // TODO: Suitable seed value.
 
