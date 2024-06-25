@@ -18,6 +18,8 @@ public class EeaCellCodeTest {
 
     Assert.assertEquals("100kmE32N35", udf.fromCoordinate(100_000,54.176, -6.349, 0.0));
     Assert.assertEquals("1kmE3263N3572", udf.fromCoordinate(1_000,54.176, -6.349, 0.0));
+
+    // If puzzling over strange results, double-check for extreme coordinate uncertainty values!
   }
 
   @Test

@@ -17,7 +17,9 @@ import org.apache.spark.sql.api.java.UDF3;
 import scala.collection.JavaConversions;
 import scala.collection.mutable.WrappedArray;
 
-public class StringArrayContainsGenericUdf implements UDF3<WrappedArray<String>,String,Boolean,Boolean> {
+import java.io.Serializable;
+
+public class StringArrayContainsGenericUdf implements UDF3<WrappedArray<String>,String,Boolean,Boolean>, Serializable {
 
   @Override
   public Boolean call(WrappedArray<String> array, String value, Boolean caseSensitive) throws Exception {

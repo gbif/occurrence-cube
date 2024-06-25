@@ -4,11 +4,13 @@ import org.apache.spark.sql.api.java.UDF4;
 import org.gbif.occurrence.cube.functions.EeaCellCode;
 import org.gbif.occurrence.cube.functions.ExtendedQuarterDegreeGridCellCode;
 
+import java.io.Serializable;
+
 /**
  * Randomize a point according to its coordinateUncertainty (or some other distance), and determine the
  * Extended Quarter Degree Grid Cell in which the randomized point lies.
  */
-public class ExtendedQuarterDegreeGridCellCodeUdfSpark implements /* Spark */ UDF4<Integer,Double,Double,Double,String> {
+public class ExtendedQuarterDegreeGridCellCodeUdfSpark implements /* Spark */ UDF4<Integer,Double,Double,Double,String>, Serializable {
 
   private final ExtendedQuarterDegreeGridCellCode extendedQuarterDegreeGridCellCode = new ExtendedQuarterDegreeGridCellCode();
 

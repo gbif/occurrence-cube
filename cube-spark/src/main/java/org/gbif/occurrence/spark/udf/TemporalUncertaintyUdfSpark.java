@@ -3,10 +3,12 @@ package org.gbif.occurrence.spark.udf;
 import org.apache.spark.sql.api.java.UDF2;
 import org.gbif.occurrence.cube.functions.TemporalUncertainty;
 
+import java.io.Serializable;
+
 /**
  * Calculate the temporal uncertainty of an eventDate and optional eventTime.
  */
-public class TemporalUncertaintyUdfSpark implements /* Spark */ UDF2<String,String,Long> {
+public class TemporalUncertaintyUdfSpark implements /* Spark */ UDF2<String,String,Long>, Serializable {
 
   private final TemporalUncertainty temporalUncertainty = new TemporalUncertainty();
 

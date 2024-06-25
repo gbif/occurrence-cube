@@ -48,11 +48,11 @@ public class MilitaryGridReferenceSystemCellCode implements Serializable {
 
     if (gridSize == 0) {
       MGRS mgrs = MGRS.from(p);
-      return mgrs.getGridZone().getName();
+      return (mgrs.getZone() < 10 ? "0" : "") + mgrs.getGridZone().getName();
     } else {
       GridType gridType = GridType.getPrecision(gridSize);
       MGRS mgrs = MGRS.from(p);
-      return mgrs.coordinate(gridType);
+      return (mgrs.getZone() < 10 ? "0" : "") + mgrs.coordinate(gridType);
     }
   }
 }

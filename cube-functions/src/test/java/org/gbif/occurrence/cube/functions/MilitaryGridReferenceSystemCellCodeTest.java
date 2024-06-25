@@ -23,6 +23,12 @@ public class MilitaryGridReferenceSystemCellCodeTest {
     Assert.assertEquals("31NAA6602100000", mgrs.fromCoordinate(1, 0.0, 0.0, 0.0));
 
     Assert.assertEquals("33TVL", mgrs.fromCoordinate(100_000, 45.8631, 14.5367, 1000.0));
+
+    // Two-digit zone numbers for zones under 10.
+    Assert.assertEquals("01C", mgrs.fromCoordinate(0, -79.0, -179.0, 0.0));
+    Assert.assertEquals("01CDN", mgrs.fromCoordinate(100_000, -79.0, -179.0, 0.0));
+
+    // If puzzling over strange results, double-check for extreme coordinate uncertainty values!
   }
 
   @Test
