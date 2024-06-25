@@ -108,6 +108,12 @@
       </dependency>
 
       <dependency>
+        <groupId>org.giscience.utils.geogrid</groupId>
+        <artifactId>geogrid</artifactId>
+        <version>0.0.1-TIM_BUILD</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-core_${scala.tools.version}</artifactId>
         <version>${spark.version}</version>

@@ -45,6 +45,10 @@
       <artifactId>mgrs</artifactId>
       <classifier>jdk8</classifier>
     </dependency>
+    <dependency>
+      <groupId>org.giscience.utils.geogrid</groupId>
+      <artifactId>geogrid</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
