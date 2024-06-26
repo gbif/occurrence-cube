@@ -2,11 +2,6 @@ package org.gbif.occurrence.cube.functions;
 
 import org.giscience.utils.geogrid.cells.GridCell;
 import org.giscience.utils.geogrid.grids.ISEA3H;
-import uk.co.riskaware.eaggr.DggsCell;
-import uk.co.riskaware.eaggr.Eaggr;
-import uk.co.riskaware.eaggr.LatLongPoint;
-import uk.co.riskaware.eaggr.enums.DggsModel;
-import uk.co.riskaware.eaggr.enums.ShapeStringFormat;
 
 import java.awt.geom.Point2D;
 import java.io.Serializable;
@@ -15,19 +10,21 @@ import java.io.Serializable;
  * ISEA3H Discrete Global Grid System.
  *
  * Cell identifiers from http://doi.org/10.1080/15230406.2018.1455157
+ *
+ * The R package has a good overview: https://cran.r-project.org/web/packages/dggridR/vignettes/dggridR.html
  */
 public class Isea3hCellCode implements Serializable {
 
   // TODO: Suitable seed value.
 
   /**
-   * Calculate the ISEA3H cell to the specified level, randomizing the coordinate
+   * Calculate the ISEA3H cell to the specified resolution, randomizing the coordinate
    * using the given uncertainty circle.
    */
   public String fromCoordinate(Integer resolution, Double lat, Double lon, Double coordinateUncertaintyInMeters) throws Exception {
     // sanitize the input, force the user to specify these values
-    if (resolution == null) {
-      throw new IllegalArgumentException("resolution is required");
+    if (resolution == null || resolution < 1 || resolution > 22) {
+      throw new IllegalArgumentException("resolution is required and must be between 1 and 22");
     }
     if (coordinateUncertaintyInMeters == null || lat == null || lon == null) {
       return null;

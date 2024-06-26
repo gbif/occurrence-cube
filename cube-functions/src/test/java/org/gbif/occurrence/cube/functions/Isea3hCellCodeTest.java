@@ -16,11 +16,38 @@ public class Isea3hCellCodeTest {
     Assert.assertEquals("549767897011250000", isea3h.fromCoordinate(5, 52.0, 10.0, 0.0));
     Assert.assertEquals("2251999962009999896", isea3h.fromCoordinate(22, 52.0, 10.0, 0.0));
 
+    // Examples from https://doi.org/10.1080/15230406.2018.1455157
+    // Statue of Liberty
+    Assert.assertEquals("5340766511074019041", isea3h.fromCoordinate(9, 40.689167, -74.044444, 0.0));
+    // Pentagonal cell in the southern ocean
+    Assert.assertEquals("-6858282526168750000", isea3h.fromCoordinate(2, -58.282526, -168.75, 0.0));
+
     // If puzzling over strange results, double-check for extreme coordinate uncertainty values!
   }
 
   @Test
   public void illegalArgumentTests() throws Exception {
+    // No grid size
+    try {
+      isea3h.fromCoordinate(null, 52.0, 10.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+
+    // Grid size 0 is not supported.
+    try {
+      isea3h.fromCoordinate(0, 52.0, 10.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+
+    // Grid size 23 is not supported.
+    try {
+      isea3h.fromCoordinate(23, 52.0, 10.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+
     // No grid size
     try {
       isea3h.fromCoordinate(null, 52.0, 10.0, 0.0);
