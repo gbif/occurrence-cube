@@ -76,4 +76,3 @@ public class Isea3hCellCodeTest {
     Assert.assertNull(isea3h.fromCoordinate(1, 52.0, 10.0, null));
   }
 }
-

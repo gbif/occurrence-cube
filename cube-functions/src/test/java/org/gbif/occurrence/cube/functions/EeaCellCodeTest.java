@@ -9,13 +9,24 @@ public class EeaCellCodeTest {
 
   @Test
   public void basicTest() throws Exception {
-    Assert.assertEquals("100kmE43N32", udf.fromCoordinate(100_000, 52.0, 10.0, 0.0));
-    Assert.assertEquals("10kmE432N321", udf.fromCoordinate(10_000, 52.0, 10.0, 0.0));
-    Assert.assertEquals("1kmE4321N3210", udf.fromCoordinate(1_000, 52.0, 10.0, 0.0));
-    Assert.assertEquals("250mE432100N321000", udf.fromCoordinate(250, 52.0, 10.0, 0.0));
-    Assert.assertEquals("100mE43210N32100", udf.fromCoordinate(100, 52.0, 10.0, 0.0));
-    Assert.assertEquals("25mE4321000N3210000", udf.fromCoordinate(25, 52.0, 10.0, 0.0));
+    // Schaan-Vaduz railway station, Lichtenstein
+    // 47.168611N, 9.508333E
+    Assert.assertEquals("100kmE42N26", udf.fromCoordinate(100_000, 47.168611, 9.508333, 0.0));
+    Assert.assertEquals("10kmE428N267", udf.fromCoordinate(10_000, 47.168611, 9.508333, 0.0));
+    Assert.assertEquals("1kmE4283N2672", udf.fromCoordinate(1_000, 47.168611, 9.508333, 0.0));
+    Assert.assertEquals("100mE42836N26729", udf.fromCoordinate(100, 47.168611, 9.508333, 0.0));
+    Assert.assertEquals("10mE428369N267290", udf.fromCoordinate(10, 47.168611, 9.508333, 0.0));
+    Assert.assertEquals("1mE4283694N2672906", udf.fromCoordinate(1, 47.168611, 9.508333, 0.0));
 
+    Assert.assertEquals("50kmE425N265", udf.fromCoordinate(50_000, 47.168611, 9.508333, 0.0));
+
+    Assert.assertEquals("250mE428350N267275", udf.fromCoordinate(250, 47.168611, 9.508333, 0.0));
+    Assert.assertEquals("25mE4283675N2672900", udf.fromCoordinate(25, 47.168611, 9.508333, 0.0));
+
+    // Any integer grid size is supported, but this isn't documented
+    Assert.assertEquals("1303mE4282961N2672453", udf.fromCoordinate(1_303, 47.168611, 9.508333, 0.0));
+
+    // Example from specification (Newry, Northern Ireland)
     Assert.assertEquals("100kmE32N35", udf.fromCoordinate(100_000,54.176, -6.349, 0.0));
     Assert.assertEquals("1kmE3263N3572", udf.fromCoordinate(1_000,54.176, -6.349, 0.0));
 
@@ -27,6 +38,20 @@ public class EeaCellCodeTest {
     // No grid size
     try {
       udf.fromCoordinate(null, 52.0, 10.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+
+    // Zero grid size
+    try {
+      udf.fromCoordinate(0, 52.0, 10.0, 0.0);
+      Assert.fail();
+    } catch (IllegalArgumentException e) {
+    }
+
+    // Size ≥ 1Mm
+    try {
+      udf.fromCoordinate(1_000_000, 52.0, 10.0, 0.0);
       Assert.fail();
     } catch (IllegalArgumentException e) {
     }

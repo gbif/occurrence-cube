@@ -58,8 +58,8 @@ public class EeaCellCode implements Serializable {
    */
   public String fromCoordinate(Integer gridSize, Double lat, Double lon, Double coordinateUncertaintyInMeters) throws Exception {
     // sanitize the input, force the user to specify these values
-    if (gridSize == null) {
-      throw new IllegalArgumentException("gridSize is required");
+    if (gridSize == null || gridSize < 1 || gridSize >= 1_000_000) {
+      throw new IllegalArgumentException("gridSize must be between 1 and 999999m");
     }
     if (coordinateUncertaintyInMeters == null || lat == null || lon == null) {
       return null;
@@ -93,6 +93,7 @@ public class EeaCellCode implements Serializable {
   }
 
   private static String eeaCellCode(int gridSize, double x, double y) {
+    // Find order (number of zeros) of the gridSize
     int order = 0;
     int t = gridSize;
     while (t % 10 == 0 && t != 0) {
@@ -100,6 +101,7 @@ public class EeaCellCode implements Serializable {
       order++;
     }
 
+    // Format the grid size using m or km.
     int o = order;
     StringBuilder sb = new StringBuilder(String.valueOf(t));
     if (o % 3 != 0) {
@@ -121,7 +123,11 @@ public class EeaCellCode implements Serializable {
       x = Math.abs(x);
       sb.append("W");
     }
-    sb.append((int) Math.floor(x / Math.pow(10, order)));
+    // Find the integer part, then round (floor) it with the required divisor
+    double xMagnitude = x / Math.pow(10, order);
+    double xFloored = t*Math.floor(xMagnitude/t);
+    sb.append((int) xFloored);
+
 
     if (y >= 0) {
       sb.append("N");
@@ -129,7 +135,10 @@ public class EeaCellCode implements Serializable {
       y = Math.abs(y);
       sb.append("S");
     }
-    sb.append((int) Math.floor(y / Math.pow(10, order)));
+    // Find the integer part, then round (floor) it with the required divisor
+    double yMagnitude = y / Math.pow(10, order);
+    double yFloored = t*Math.floor(yMagnitude/t);
+    sb.append((int) yFloored);
 
     return sb.toString();
   }
