@@ -10,6 +10,7 @@ public class UDFS {
     sparkSession.udf().register("mgrsCellCode", new MilitaryGridReferenceSystemCellCodeUdfSpark(), DataTypes.StringType);
     sparkSession.udf().register("isea3hCellCode", new Isea3hCellCodeUdfSpark(), DataTypes.StringType);
     sparkSession.udf().register("qdgcCode", new ExtendedQuarterDegreeGridCellCodeUdfSpark(), DataTypes.StringType);
+    sparkSession.udf().register("dmsCellCode", new DmsGridCellCodeUdfSpark(), DataTypes.StringType);
     sparkSession.udf().register("stringArrayContains", new StringArrayContainsGenericUdf(), DataTypes.BooleanType);
   }
 }

@@ -67,7 +67,7 @@ public class ExtendedQuarterDegreeGridCellCode implements Serializable {
   private static final char[] K = {'B', 'A', 'D', 'C'};
   private static final char[] L = {'A', 'B', 'C', 'D'};
 
-  private static String extendedQuarterDegreeGridCellCode(int level, double lat, double lon) {
+  protected static String extendedQuarterDegreeGridCellCode(int level, double lat, double lon) {
     StringBuilder sb = new StringBuilder();
 
     // Determine which 'square' we are in, see above.

@@ -66,12 +66,20 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>geotools</id>
+      <url>https://repo.osgeo.org/repository/geotools-releases/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
   </repositories>
 
   <modules>
     <module>cube-functions</module>
     <module>cube-hive</module>
     <module>cube-spark</module>
+    <module>grid-generator</module>
   </modules>
 
   <dependencyManagement>
