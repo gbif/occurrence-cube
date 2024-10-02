@@ -70,35 +70,8 @@ public class ExtendedQuarterDegreeGridCellCode implements Serializable {
   private static String extendedQuarterDegreeGridCellCode(int level, double lat, double lon) {
     StringBuilder sb = new StringBuilder();
 
-    if (lon >= 0) {
-      sb.append('E');
-    } else {
-      sb.append('W');
-    }
-    if (Math.abs(lon) < 100) {
-      sb.append('0');
-      if (Math.abs(lon) < 10) {
-        sb.append('0');
-      }
-    }
-    sb.append((int)Math.floor(Math.abs(lon)));
-
-    if (lat >= 0) {
-      sb.append('N');
-    } else {
-      sb.append('S');
-    }
-    if (Math.abs(lat) < 10) {
-      sb.append('0');
-    }
-    sb.append((int)Math.floor(Math.abs(lat)));
-
-    double boundary = 1;
-    double x = Math.abs(lon - ((int)lon));
-    double y = Math.abs(lat - ((int)lat));
-
+    // Determine which 'square' we are in, see above.
     char[] square;
-
     if (lon > 0) {
       if (lat > 0) {
         square = J;
@@ -113,6 +86,44 @@ public class ExtendedQuarterDegreeGridCellCode implements Serializable {
       }
     }
 
+    // Decimal part of the latitude and longitude.
+    double x = Math.abs(lon - ((int)lon));
+    double y = Math.abs(lat - ((int)lat));
+
+    // Integer parts of longitude and latitude.
+    if (lon >= 0) {
+      sb.append('E');
+    } else {
+      sb.append('W');
+      // Increment the negative longitude to account for there being two zeros, E000 and W000.
+      if ((lon % 1) == 0) {
+        lon += 1;
+      }
+    }
+    if (Math.abs(lon) < 100) {
+      sb.append('0');
+      if (Math.abs(lon) < 10) {
+        sb.append('0');
+      }
+    }
+    sb.append((int)Math.floor(Math.abs(lon)));
+
+    if (lat >= 0) {
+      sb.append('N');
+    } else {
+      sb.append('S');
+      // Increment the negative latitude to account for there being two zeros, N00 and S00.
+      if ((lat % 1) == 0) {
+        lat += 1;
+      }
+    }
+    if (Math.abs(lat) < 10) {
+      sb.append('0');
+    }
+    sb.append((int)Math.floor(Math.abs(lat)));
+
+    // Sub-degree alphabetical identifiers.
+    double boundary = 1;
     for (int l = 1; l <= level; l++) {
       boundary /= 2;
 
