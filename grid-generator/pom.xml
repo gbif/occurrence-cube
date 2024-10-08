@@ -13,8 +13,10 @@
   <name>Occurrence Cube SQL functions – Grid Geopackage generator</name>
 
   <properties>
+    <java.version>11</java.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -50,10 +52,44 @@
       <artifactId>gt-referencing</artifactId>
       <version>31.2</version>
     </dependency>
-    <dependency>
-      <groupId>org.geotools</groupId>
-      <artifactId>gt-epsg-hsql</artifactId>
-      <version>31.2</version>
-    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <!-- Override defaults from Motherpom -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <compilerId>javac</compilerId>
+          <forceJavacCompilerUse>true</forceJavacCompilerUse>
+          <compilerArgs>
+            <arg>-verbose</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-toolchains-plugin</artifactId>
+        <version>1.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>toolchain</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <toolchains>
+            <jdk>
+              <version>11</version>
+              <vendor>openjdk</vendor>
+            </jdk>
+          </toolchains>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
