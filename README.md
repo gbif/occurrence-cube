@@ -46,7 +46,7 @@ It is envisaged the workflow will be structured as follows, and initiated throug
     3. NetCDF
     4. HDF 5
     5. GeoTIFF
-    6. [ZAAR](https://zarr.readthedocs.io/en/stable/)
+    6. [Zarr](https://zarr.readthedocs.io/en/stable/)
     7. Etc
 
 6. Assign DOI (Including links to the source datasets)
