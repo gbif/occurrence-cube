@@ -38,6 +38,6 @@ Occurrence Cube is licensed under the [Apache License, Version 2.0](LICENSE-APAC
 
 ### Acknowledgements
 
-<img src="funded_by_the_eu.png" alt="Funded by the European Union" width="50%">
+<img src="images/funded_by_the_eu.png" alt="Funded by the European Union" width="50%"><img src="images/b3_logo.png" alt="B3 logo" width="50%">
 
 The GBIF development of species occurrence cubes is part of [B³](https://b-cubed.eu/) (Biodiversity Building Blocks for policy) Work Package 2, led by the Research Institute for Nature and Forest (INBO) and funded by the European Union’s Horizon Europe Research and Innovation Programme (ID No [101059592](https://doi.org/10.3030/101059592)).
