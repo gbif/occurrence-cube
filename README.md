@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10607133.svg)](https://doi.org/10.5281/zenodo.10607133)
 
-Occurrence Cube provides **user defined functions (UDF)** to aggregate species occurrence data with Structured Query Language (SQL). By using these functions, users don't have to write complex aggregation queries themselves. The functions are especially relevant when creating [species occurrence cubes](https://www.gbif.org/occurrence-cubes) and can be called from the [SQL download API](https://techdocs.gbif.org/en/data-use/api-sql-downloads).
+Occurrence Cube provides **user defined functions (UDF)** to aggregate species occurrence data with Structured Query Language (SQL). They avoid users having to write complex aggregation queries themselves. The functions are especially relevant when creating [species occurrence cubes](https://www.gbif.org/occurrence-cubes) and can be used in the [SQL download API](https://techdocs.gbif.org/en/data-use/api-sql-downloads).
 
 Found a bug or have a suggestion? Submit it as an [issue](https://github.com/gbif/occurrence-cube/issues).
 
