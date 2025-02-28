@@ -15,8 +15,12 @@ authors:
     orcid: 'https://orcid.org/0000-0002-8442-8025'
 title: Occurrence cube functions
 abstract: >-
-  Functions for producing species occurrence cubes from
-  GBIF-mediated data.
+  Occurrence Cube provides user defined functions (UDF) to
+  aggregate species occurrence data with Structured Query
+  Language (SQL). They avoid users having to write complex
+  aggregation queries themselves. The functions are
+  especially relevant when creating species occurrence cubes
+  and can be used in the GBIF SQL download API.
 keywords:
   - GBIF
   - species occurrence
