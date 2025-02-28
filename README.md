@@ -16,7 +16,7 @@ SELECT
     1000,             -- Size of the grid cell (1 km)
     decimalLatitude,  -- Latitude of the occurrence
     decimalLongitude, -- Longitude of the occurrence
-    0                 -- Spatial uncertainty (0 m)
+    0.0               -- Spatial uncertainty (0 m)
   ) AS eeaCellCode,
   count(*) AS occurrences
 FROM
