@@ -1,5 +1,12 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+title: Occurrence Cube
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
 authors:
   - given-names: Matthew
     family-names: Blissett
@@ -13,7 +20,16 @@ authors:
     family-names: Desmet
     affiliation: Research Institute for Nature and Forest (INBO)
     orcid: 'https://orcid.org/0000-0002-8442-8025'
-title: Occurrence cube functions
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.10607133
+    description: Versionless DOI for this work.
+  - type: doi
+    value: 10.3030/101059592
+    description: DOI for related project.
+repository-code: 'https://github.com/gbif/occurrence-cube'
+url: >-
+  https://techdocs.gbif.org/en/data-use/api-sql-download-functions
 abstract: >-
   Occurrence Cube provides user defined functions (UDF) to
   aggregate species occurrence data with Structured Query
@@ -22,8 +38,11 @@ abstract: >-
   especially relevant when creating species occurrence cubes
   and can be used in the GBIF SQL download API.
 keywords:
+  - UDF
+  - SQL
   - GBIF
-  - species occurrence
-license: MIT
-type: software
-url: "https://github.com/gbif/occurrence-cube"
+  - species occurrences
+  - data cubes
+license:
+  - Apache-2.0
+  - MIT
