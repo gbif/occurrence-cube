@@ -20,7 +20,7 @@ public class RandomizeCoordinate implements Serializable {
 
     GeodeticCalculator calc = new GeodeticCalculator();
     calc.setStartingGeographicPoint(point);
-    double azimuth = Math.random() * 2 * Math.PI;
+    double azimuth = Math.random() * 360;
     double distance = Math.sqrt(Math.random()) * coordinateUncertaintyInMeters;
     calc.setDirection(azimuth, distance);
     return calc.getDestinationGeographicPoint();
