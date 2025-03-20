@@ -10,7 +10,7 @@
 
   <groupId>org.gbif.occurrence</groupId>
   <artifactId>cube</artifactId>
-  <version>0.3.2-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <name>Occurrence Cubes</name>
@@ -20,7 +20,7 @@
     <connection>scm:git:git@github.com:gbif/occurrence-cube.git</connection>
     <url>https://github.com/gbif/occurrence-cube</url>
     <developerConnection>scm:git:git@github.com:gbif/occurrence-cube.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>cube-1.0.0</tag>
   </scm>
 
   <distributionManagement>
