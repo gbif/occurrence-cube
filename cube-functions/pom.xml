@@ -43,7 +43,6 @@
     <dependency>
       <groupId>mil.nga</groupId>
       <artifactId>mgrs</artifactId>
-      <classifier>jdk8</classifier>
     </dependency>
     <dependency>
       <groupId>org.giscience.utils.geogrid</groupId>

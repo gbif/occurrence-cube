@@ -12,15 +12,6 @@
   <packaging>jar</packaging>
   <name>Occurrence Cube SQL functions – Spark packaging</name>
 
-  <properties>
-    <!--maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
-    <scala.tools.version>2.11</scala.tools.version>
-    <spark.version>2.3.0</spark.version>
-    <hive.version>1.1.0-cdh5.16.0</hive.version>
-    <hadoop.version>2.6.0-cdh5.16.0</hadoop.version-->
-  </properties>
-
   <build>
     <plugins>
       <plugin>
