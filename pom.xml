@@ -54,13 +54,6 @@
       <url>https://repository.gbif.org/content/groups/gbif/</url>
     </repository>
     <repository>
-      <id>cloudera-repos</id>
-      <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
       <id>geotools</id>
       <url>https://repo.osgeo.org/repository/geotools-releases/</url>
       <snapshots>
