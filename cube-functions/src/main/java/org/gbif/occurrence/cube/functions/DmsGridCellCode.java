@@ -2,16 +2,17 @@ package org.gbif.occurrence.cube.functions;
 
 import java.awt.geom.Point2D;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
- * Grid cell codes in an invented degrees-minutes-seconds format, with rounding to a given number of seconds.
+ * Grid Cell codes in a degree-minute-seconds format using the recommendation from the INSPIRE Data Specification on Statistical Units – Technical Guidelines
+ *
+ * https://knowledge-base.inspire.ec.europa.eu/publications/inspire-data-specification-statistical-units-technical-guidelines_en
  */
 public class DmsGridCellCode implements Serializable {
 
-  // TODO: Suitable seed value.
-
   /**
-   * Grid cell codes in an invented degrees-minutes-seconds format, with rounding to a given number of seconds.
+   * Grid Cell codes in a degree-minute-seconds format using the recommendation from the INSPIRE Data Specification on Statistical Units – Technical Guidelines
    *
    * Randomize the coordinate using the given uncertainty circle.
    */
@@ -38,89 +39,74 @@ public class DmsGridCellCode implements Serializable {
   }
 
   protected static String dmsGridCellCode(int divisor, double lat, double lon) {
-    StringBuilder sbLat = new StringBuilder();
-    StringBuilder sbLon = new StringBuilder();
+    // Use the EuroStat Grid Cell code recommendation: https://inspire-mif.github.io/technical-guidelines/data/su/dataspecification_su.html#_grid_package
+    // The cell code is built according to the following pattern:
+    // CRS<EPSGcode>*RES*(<size>mN<northing>E<easting>)|(<d>-<m>-<s>dmsLON<d>-<m>-<s>LAT<d>-<m>-<s>)
+    // This code is composed of:
+    // A coordinate reference system part, represented by the word CRS, followed by the EPSG code.
+    // A resolution and position part, which can be:
+    // if the coordinate reference system is projected, the word RES followed by the grid resolution in meters and the letter m. Then, the letter N followed by the northing value in meters, and the letter E followed by the easting value in meters too,
+    // if the coordinate reference system is not projected, the word RES followed by the grid resolution in degree-minute-second, followed by the word dms. Then the word LON followed by the longitude value in degree-minute-second, and word LAT followed by the latitude value in degree-minute-second.
 
-    int dLat;
-    int dLon;
-    dLat = (int) Math.floor(Math.abs(lat));
-    dLon = (int) Math.floor(Math.abs(lon));
-
-    // Integer parts of longitude and latitude.
-    if (lon >= 0) {
-      sbLon.append('E');
-    } else {
-      sbLon.append('W');
-      // Decrement the negative longitude to account for there being two zeros, E000 and W000.
-      if ((lon % 1) == 0) {
-        dLon -= 1;
-      }
-    }
-    if (Math.abs(dLon) < 100) {
-      sbLon.append('0');
-      if (Math.abs(dLon) < 10) {
-        sbLon.append('0');
-      }
-    }
-    sbLon.append(dLon); // °
-
-    if (lat >= 0) {
-      sbLat.append('N');
-    } else {
-      sbLat.append('S');
-      // Decrement the negative latitude to account for there being two zeros, N00 and S00.
-      if ((lat % 1) == 0) {
-        dLat -= 1;
-      }
-    }
-    if (Math.abs(dLat) < 10) {
-      sbLat.append('0');
-    }
-    sbLat.append(dLat); // °
+    StringBuilder sb = new StringBuilder("CRS4326RES");
 
     if (divisor == 3600) {
-      // Degrees only
-      sbLon.append(sbLat);
-      return sbLon.toString();
+      sb.append("1-0-0");
     } else if (divisor % 60 == 0) {
       // Minutes only.
       int factor = 3600 / divisor;
       int multiple = 60 / factor;
 
-      int mLat = (int) Math.floor((Math.abs(lat)*factor)%factor)*multiple;
-      int mLon = (int) Math.floor((Math.abs(lon)*factor)%factor)*multiple;
-
-      if (Math.abs(mLat) < 10) { sbLat.append('0'); }
-      sbLat.append(mLat); // ′
-      if (Math.abs(mLon) < 10) { sbLon.append('0'); }
-      sbLon.append(mLon); // ′
-
-      sbLon.append(sbLat);
-      return sbLon.toString();
+      sb.append("0-");
+      sb.append(multiple);
+      sb.append("-0");
     } else {
-      // Round to given seconds
       int factor = 3600 / divisor;
-      int sLat = (int) Math.floor((Math.abs(lat)*factor)%factor)*divisor;
-      int sLon = (int) Math.floor((Math.abs(lon)*factor)%factor)*divisor;
+      int multiple = 60 / factor;
 
-      // Find minutes
-      int mLat = sLat / 60;
-      int mLon = sLon / 60;
-      if (Math.abs(mLat) < 10) { sbLat.append('0'); }
-      sbLat.append(mLat); // ′
-      if (Math.abs(mLon) < 10) { sbLon.append('0'); }
-      sbLon.append(mLon); // ′
-
-      // Remaining seconds
-      sLat = sLat % 60;
-      sLon = sLon % 60;
-      if (Math.abs(sLat) < 10) { sbLat.append('0'); }
-      sbLat.append(sLat); // ″
-      if (Math.abs(sLon) < 10) { sbLon.append('0'); }
-      sbLon.append(sLon); // ″
-
-      sbLon.append(sbLat);
-      return sbLon.toString();
+      sb.append("0-");
+      sb.append(multiple);
+      sb.append("-");
+      sb.append(divisor - multiple * 60);
     }
+
+    String dLatSgn = lat < 0 ? "-" : "";
+    String dLonSgn = lon < 0 ? "-" : "";
+
+    // Knocking negative numbers back one step on the grid, then rounding as if they are positive gives
+    // the lower left corner of the cell.
+    if (lat < 0) {
+      lat = Math.nextDown(Math.abs(lat - divisor/3600.0));
+    }
+    if (lon < 0) {
+      lon = Math.nextDown(Math.abs(lon - divisor/3600.0));
+    }
+
+    int dLat;
+    int dLon;
+    dLat = (int) Math.floor(lat);
+    dLon = (int) Math.floor(lon);
+
+    // Remove integer part
+    lat -= dLat;
+    lon -= dLon;
+    BigDecimal x = new BigDecimal(52.3);
+
+    // Round to given seconds
+    int factor = 3600 / divisor;
+    int sLat = (int) Math.floor((lat*factor)%factor)*divisor;
+    int sLon = (int) Math.floor((lon*factor)%factor)*divisor;
+
+    // Find minutes
+    int mLat = sLat / 60;
+    int mLon = sLon / 60;
+
+    // Remaining seconds
+    sLat = sLat % 60;
+    sLon = sLon % 60;
+
+    sb.append("LON").append(dLonSgn).append(dLon).append('-').append(mLon).append('-').append(sLon);
+    sb.append("LAT").append(dLatSgn).append(dLat).append('-').append(mLat).append('-').append(sLat);
+    return sb.toString();
   }
 }
