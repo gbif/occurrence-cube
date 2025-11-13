@@ -1,10 +1,5 @@
 package org.gbif.occurrence.cube.functions;
 
-import org.geotools.api.referencing.crs.CoordinateReferenceSystem;
-import org.geotools.api.referencing.operation.MathTransform;
-import org.geotools.referencing.CRS;
-import org.geotools.referencing.crs.DefaultGeographicCRS;
-
 import java.io.Serializable;
 
 /**
