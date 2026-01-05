@@ -1,4 +1,6 @@
-package org.gbif.occurrence.cube.functions;
+package org.gbif.occurrence.cube.grids;
+
+import org.gbif.occurrence.cube.functions.DmsGridCellCode;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +12,13 @@ import java.io.IOException;
 public class DmsGridGenerator extends GridGenerator {
   static DmsGridCellCode dmsgcc = new DmsGridCellCode();
 
+  DmsGridGenerator(int startX, int startY, int endX, int endY) {
+    super(startX, startY, endX, endY);
+  }
+
   public static void main(String[] args) throws IOException {
 
-    GridGenerator gg = new DmsGridGenerator();
+    GridGenerator gg = new DmsGridGenerator(-180, -90, 180, 90);
 
     int[] levels = {3600, 1800, 900, 600, 300, 150, 60, 30};
     if (args.length == 1) {

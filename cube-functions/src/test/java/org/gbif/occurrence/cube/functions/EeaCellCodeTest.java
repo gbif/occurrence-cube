@@ -19,9 +19,12 @@ public class EeaCellCodeTest {
     Assert.assertEquals("1mE4283694N2672906", udf.fromCoordinate(1, 47.168611, 9.508333, 0.0));
 
     Assert.assertEquals("50kmE425N265", udf.fromCoordinate(50_000, 47.168611, 9.508333, 0.0));
+    Assert.assertEquals("5kmE4280N2670", udf.fromCoordinate(5_000, 47.168611, 9.508333, 0.0));
 
     Assert.assertEquals("250mE428350N267275", udf.fromCoordinate(250, 47.168611, 9.508333, 0.0));
     Assert.assertEquals("25mE4283675N2672900", udf.fromCoordinate(25, 47.168611, 9.508333, 0.0));
+
+    Assert.assertEquals("2kmE4282N2672", udf.fromCoordinate(2_000, 47.168611, 9.508333, 0.0));
 
     // Any integer grid size is supported, but this isn't documented
     Assert.assertEquals("1303mE4282961N2672453", udf.fromCoordinate(1_303, 47.168611, 9.508333, 0.0));

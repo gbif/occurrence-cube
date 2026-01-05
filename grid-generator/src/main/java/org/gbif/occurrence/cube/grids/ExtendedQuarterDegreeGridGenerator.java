@@ -1,4 +1,6 @@
-package org.gbif.occurrence.cube.functions;
+package org.gbif.occurrence.cube.grids;
+
+import org.gbif.occurrence.cube.functions.ExtendedQuarterDegreeGridCellCode;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +12,13 @@ import java.io.IOException;
 public class ExtendedQuarterDegreeGridGenerator extends GridGenerator {
   ExtendedQuarterDegreeGridCellCode eqdgcc = new ExtendedQuarterDegreeGridCellCode();
 
+  ExtendedQuarterDegreeGridGenerator(int startX, int startY, int endX, int endY) {
+    super(startX, startY, endX, endY);
+  }
+
   public static void main(String[] args) throws IOException {
 
-    GridGenerator gg = new ExtendedQuarterDegreeGridGenerator();
+    GridGenerator gg = new ExtendedQuarterDegreeGridGenerator(-180, -90, 180, 90);
 
     int[] levels = {0, 1, 2, 3, 4, 5, 6, 7};
     if (args.length == 1) {

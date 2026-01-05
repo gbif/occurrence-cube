@@ -1,4 +1,4 @@
-package org.gbif.occurrence.cube.functions;
+package org.gbif.occurrence.cube.grids;
 
 import org.geotools.api.data.DataStore;
 import org.geotools.api.data.DataStoreFinder;
@@ -31,11 +31,33 @@ import java.util.List;
 public abstract class GridGenerator {
   static GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory();
 
+  final String srs;
+  final BigDecimal startX;
+  final BigDecimal startY;
+  final BigDecimal endX;
+  final BigDecimal endY;
+
   abstract String gridCode(int level, double lat, double lon);
 
   abstract String layerName(int level);
 
   abstract double step(int level);
+
+  GridGenerator() {
+    this("EPSG:4326", -180, -90, 180, 90);
+  }
+
+  GridGenerator(int startX, int startY, int endX, int endY) {
+    this("EPSG:4326", startX, startY, endX, endY);
+  }
+
+  GridGenerator(String srs, int startX, int startY, int endX, int endY) {
+    this.srs = srs;
+    this.startX = new BigDecimal(startX);
+    this.startY = new BigDecimal(startY);
+    this.endX = new BigDecimal(endX);
+    this.endY = new BigDecimal(endY);
+  }
 
   void makeGrid(int level, File file) throws IOException {
     long start = System.currentTimeMillis();
@@ -54,7 +76,7 @@ public abstract class GridGenerator {
     SimpleFeatureTypeBuilder builder = new SimpleFeatureTypeBuilder();
     String layerName = layerName(level);
     builder.setName(layerName);
-    builder.setSRS("EPSG:4326");
+    builder.setSRS(srs);
     builder.add("geom", Polygon.class);
     builder.add("cellCode", String.class);
     SimpleFeatureType featureType = builder.buildFeatureType();
@@ -70,11 +92,11 @@ public abstract class GridGenerator {
 
     List<SimpleFeature> features = new ArrayList<>();
     BigDecimal bds = new BigDecimal(step(level));
-    BigDecimal bd180 = new BigDecimal(180).subtract(bds);
-    BigDecimal bd90 = new BigDecimal(90).subtract(bds);
-    System.out.println("Limit is "+bd180+","+bd90);
-    for (BigDecimal bdx = new BigDecimal(-180); bdx.compareTo(bd180) < 1; bdx = bdx.add(bds)) {
-      for (BigDecimal bdy = new BigDecimal(-90); bdy.compareTo(bd90) < 1; bdy = bdy.add(bds)) {
+    BigDecimal bdEndX = endX.subtract(bds);
+    BigDecimal bdEndY = endY.subtract(bds);
+    System.out.println("Limit is "+bdEndX+","+bdEndY);
+    for (BigDecimal bdx = startX; bdx.compareTo(bdEndX) < 1; bdx = bdx.add(bds)) {
+      for (BigDecimal bdy = startY; bdy.compareTo(bdEndY) < 1; bdy = bdy.add(bds)) {
         double x = bdx.doubleValue();
         double y = bdy.doubleValue();
 
