@@ -15,7 +15,7 @@ public class EeaCellCode extends Etrs89LaeaTransform implements Serializable {
     return ! (x < 1_896_628.62 || x > 7_104_179.2 || y < 1_095_703.18 || y > 6_882_401.15);
   }
 
-  String cellCode(int gridSize, double x, double y) {
+  public String cellCode(int gridSize, double x, double y) {
     // Find order (number of zeros) of the gridSize
     int order = 0;
     int t = gridSize;

@@ -20,7 +20,6 @@
     </repository>
   </repositories>
 
-  <!-- Note this project is using its own dependencies, with a much newer version of Geotools -->
   <dependencies>
     <dependency>
       <groupId>org.gbif.occurrence</groupId>
@@ -30,17 +29,14 @@
     <dependency>
       <groupId>org.geotools</groupId>
       <artifactId>gt-geopkg</artifactId>
-      <version>31.2</version>
     </dependency>
     <dependency>
       <groupId>org.geotools</groupId>
       <artifactId>gt-epsg-hsql</artifactId>
-      <version>31.2</version>
     </dependency>
     <dependency>
       <groupId>org.geotools</groupId>
       <artifactId>gt-referencing</artifactId>
-      <version>31.2</version>
     </dependency>
   </dependencies>
 

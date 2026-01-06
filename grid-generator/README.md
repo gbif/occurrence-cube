@@ -27,3 +27,5 @@ mvn exec:java -Dexec.mainClass=org.gbif.occurrence.cube.grids.DmsGridGenerator
 mvn exec:java -Dexec.mainClass=org.gbif.occurrence.cube.grids.EeaGridGenerator
 mvn exec:java -Dexec.mainClass=org.gbif.occurrence.cube.grids.ExtendedQuarterDegreeGridGenerator
 ```
+
+Alternatively, edit and run these classes using an IDE.

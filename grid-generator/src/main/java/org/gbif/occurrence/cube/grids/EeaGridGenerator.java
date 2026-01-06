@@ -1,5 +1,7 @@
 package org.gbif.occurrence.cube.grids;
 
+import org.gbif.occurrence.cube.functions.EeaCellCode;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -8,7 +10,7 @@ import java.io.IOException;
  * at the specified level.
  */
 public class EeaGridGenerator extends GridGenerator {
-  static EeaCellCodeGeopackage31 eeacc = new EeaCellCodeGeopackage31();
+  static EeaCellCode eeacc = new EeaCellCode();
 
   EeaGridGenerator(String srs, int startX, int startY, int endX, int endY) {
     super(srs, startX, startY, endX, endY);
