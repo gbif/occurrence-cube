@@ -14,7 +14,7 @@ public class EuroStatCellCode extends Etrs89LaeaTransform implements Serializabl
     return true;
   }
 
-  String cellCode(int gridSize, double x, double y) {
+  public String cellCode(int gridSize, double x, double y) {
     // The cell code is built according to the following pattern:
     // CRS<EPSGcode>*RES*(<size>mN<northing>E<easting>)|(<d>-<m>-<s>dmsLON<d>-<m>-<s>LAT<d>-<m>-<s>)
     // This code is composed of:
