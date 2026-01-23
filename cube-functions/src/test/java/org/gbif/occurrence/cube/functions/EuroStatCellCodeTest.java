@@ -44,6 +44,15 @@ public class EuroStatCellCodeTest {
     // Le Robert, Martinique
     Assert.assertEquals(  "CRS3035RES5000mN2500000E-2665000", udf.fromCoordinate(5_000,14.6792, -60.9403, 0.0));
 
+    // Values in techdocs (used https://www.gbif.org/occurrence/4875477955).
+    Assert.assertEquals("CRS3035RES100000mN2400000E4800000", udf.fromCoordinate(100_000, 45.28043, 16.84088, 0.0));
+    Assert.assertEquals("CRS3035RES50000mN2450000E4850000", udf.fromCoordinate(50_000, 45.28043, 16.84088, 0.0));
+    Assert.assertEquals("CRS3035RES20000mN2480000E4840000", udf.fromCoordinate(20_000, 45.28043, 16.84088, 0.0));
+    Assert.assertEquals("CRS3035RES10000mN2480000E4850000", udf.fromCoordinate(10_000, 45.28043, 16.84088, 0.0));
+    Assert.assertEquals("CRS3035RES5000mN2485000E4855000", udf.fromCoordinate(5_000, 45.28043, 16.84088, 0.0));
+    Assert.assertEquals("CRS3035RES2000mN2486000E4856000", udf.fromCoordinate(2_000, 45.28043, 16.84088, 0.0));
+    Assert.assertEquals("CRS3035RES1000mN2487000E4857000", udf.fromCoordinate(1_000, 45.28043, 16.84088, 0.0));
+
     // If puzzling over strange results, double-check for extreme coordinate uncertainty values!
   }
 

@@ -34,6 +34,17 @@ public class EeaCellCodeTest {
     Assert.assertEquals("1kmE3263N3572", udf.fromCoordinate(1_000,54.176, -6.349, 0.0));
 
     // If puzzling over strange results, double-check for extreme coordinate uncertainty values!
+
+    // Values in techdocs (used https://www.gbif.org/occurrence/2557795916).
+    Assert.assertEquals("100kmE51N29", udf.fromCoordinate(100_000, 48.99949, 20.75808, 0.0));
+    Assert.assertEquals("50kmE510N290", udf.fromCoordinate(50_000, 48.99949, 20.75808, 0.0));
+    Assert.assertEquals("10kmE510N293", udf.fromCoordinate(10_000, 48.99949, 20.75808, 0.0));
+    Assert.assertEquals("5kmE5105N2930", udf.fromCoordinate(5_000, 48.99949, 20.75808, 0.0));
+    Assert.assertEquals("2kmE5104N2932", udf.fromCoordinate(2_000, 48.99949, 20.75808, 0.0));
+    Assert.assertEquals("1kmE5105N2933", udf.fromCoordinate(1_000, 48.99949, 20.75808, 0.0));
+    Assert.assertEquals("250mE510500N293350", udf.fromCoordinate(250, 48.99949, 20.75808, 0.0));
+    Assert.assertEquals("100mE51052N29336", udf.fromCoordinate(100, 48.99949, 20.75808, 0.0));
+    Assert.assertEquals("25mE5105200N2933675", udf.fromCoordinate(25, 48.99949, 20.75808, 0.0));
   }
 
   @Test

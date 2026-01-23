@@ -49,6 +49,15 @@ public class ExtendedQuarterDegreeGridCellCodeTest {
     Assert.assertEquals("E014N46CA", eqdgcc.fromCoordinate(2, 46.377106, 14.033383, 1000.0));
 
     // If puzzling over strange results, double-check for extreme coordinate uncertainty values!
+
+    // Values in techdocs (used https://www.gbif.org/occurrence/1931511933).
+    Assert.assertEquals("W175S21", eqdgcc.fromCoordinate(0, -21.34284, -175.03633, 0.0));
+    Assert.assertEquals("W175S21B", eqdgcc.fromCoordinate(1, -21.34284, -175.03633, 0.0));
+    Assert.assertEquals("W175S21BD", eqdgcc.fromCoordinate(2, -21.34284, -175.03633, 0.0));
+    Assert.assertEquals("W175S21BDB", eqdgcc.fromCoordinate(3, -21.34284, -175.03633, 0.0));
+    Assert.assertEquals("W175S21BDBD", eqdgcc.fromCoordinate(4, -21.34284, -175.03633, 0.0));
+    Assert.assertEquals("W175S21BDBDA", eqdgcc.fromCoordinate(5, -21.34284, -175.03633, 0.0));
+    Assert.assertEquals("W175S21BDBDAD", eqdgcc.fromCoordinate(6, -21.34284, -175.03633, 0.0));
   }
 
   @Test
